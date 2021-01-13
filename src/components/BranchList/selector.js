@@ -1,4 +1,5 @@
 import { createSelector } from "reselect";
+import { getFavBranches } from "../Favorites/selector";
 
 export const extractBranches = (state) => state.branchList.branches;
 
@@ -11,10 +12,11 @@ export const getPgno = (state) => state.branchList.pgno;
 export const getBranches = createSelector(
   extractBranches,
   getSearchText,
-  (branches, searchText) => {
+  getFavBranches,
+  (branches, searchText, favBranches) => {
     searchText = searchText.toLowerCase();
 
-    return branches.filter((branch) => {
+    const filteredBranches = branches.filter((branch) => {
       let flag = false;
       flag |= branch["ifsc"].toLowerCase().includes(searchText);
       flag |= branch["branch"].toLowerCase().includes(searchText);
@@ -26,5 +28,7 @@ export const getBranches = createSelector(
 
       return flag;
     });
+
+    return filteredBranches;
   }
 );

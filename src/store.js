@@ -7,10 +7,12 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import NavbarReducer from "./components/Navbar/reducer";
 import BranchListReducer from "./components/BranchList/reducer";
+import FavouritesReducer from "./components/Favorites/reducer";
 
 const reducers = {
   navbar: NavbarReducer,
   branchList: BranchListReducer,
+  favourites: FavouritesReducer,
 };
 
 // const persistConfig = {
