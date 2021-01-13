@@ -1,5 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { getFavBranches } from "../Favorites/selector";
 import { bindActionCreators } from "redux";
 import {
@@ -7,7 +8,6 @@ import {
   removeFavouriteHandler,
 } from "../BranchList/thunk";
 
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { IconButton } from "@material-ui/core";
 
@@ -51,21 +51,19 @@ function BasicTable({
             {favBranches.map((branch) => (
               <TableRow key={branch["ifsc"]}>
                 <TableCell align="center">
-                  {branch["isFav"] ? (
-                    <IconButton
-                      onClick={() => removeFavouriteHandler(branch["ifsc"])}
-                    >
-                      <FavoriteIcon />
-                    </IconButton>
-                  ) : (
-                    <IconButton onClick={() => makeFavouriteHandler(branch)}>
-                      <FavoriteBorderIcon />
-                    </IconButton>
-                  )}
+                  <IconButton
+                    onClick={() => removeFavouriteHandler(branch["ifsc"])}
+                  >
+                    <FavoriteIcon color='secondary' />
+                  </IconButton>
                 </TableCell>
                 <TableCell>{branch["ifsc"]}</TableCell>
                 <TableCell>{branch["bank_id"]}</TableCell>
-                <TableCell>{branch["branch"]}</TableCell>
+                <TableCell>
+                  <Link to={`/banks/${branch["ifsc"]}`}>
+                    {branch["branch"]}
+                  </Link>
+                </TableCell>
                 <TableCell>{branch["address"]}</TableCell>
                 <TableCell>{branch["city"]}</TableCell>
                 <TableCell>{branch["district"]}</TableCell>

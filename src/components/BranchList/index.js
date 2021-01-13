@@ -6,7 +6,8 @@ import SimpleTable from "./SimpleTable";
 import { fetchBranches } from "./thunk";
 
 export const BranchList = ({ fetchBranches }) => {
-  useEffect(fetchBranches);
+  // eslint-disable-next-line
+  useEffect(fetchBranches, []);
 
   return (
     <div>

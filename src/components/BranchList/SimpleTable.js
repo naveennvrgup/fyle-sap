@@ -1,6 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { getBranches, getPageSize, getCount, getPgno } from "./selector";
+import { Link } from "react-router-dom";
 import { getIsLoading } from "../Navbar/selector";
 import { getFavBranches } from "../Favorites/selector";
 import { bindActionCreators } from "redux";
@@ -73,7 +74,7 @@ function BasicTable({
                     <IconButton
                       onClick={() => removeFavouriteHandler(branch["ifsc"])}
                     >
-                      <FavoriteIcon />
+                      <FavoriteIcon color='secondary' />
                     </IconButton>
                   ) : (
                     <IconButton onClick={() => makeFavouriteHandler(branch)}>
@@ -83,7 +84,11 @@ function BasicTable({
                 </TableCell>
                 <TableCell>{branch["ifsc"]}</TableCell>
                 <TableCell>{branch["bank_id"]}</TableCell>
-                <TableCell>{branch["branch"]}</TableCell>
+                <TableCell>
+                  <Link to={`/banks/${branch["ifsc"]}`}>
+                    {branch["branch"]}
+                  </Link>
+                </TableCell>
                 <TableCell>{branch["address"]}</TableCell>
                 <TableCell>{branch["city"]}</TableCell>
                 <TableCell>{branch["district"]}</TableCell>
