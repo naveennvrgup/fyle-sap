@@ -4,12 +4,12 @@ import { getBranches, getPageSize, getCount, getPgno } from "./selector";
 import { getIsLoading } from "../Navbar/selector";
 import { getFavBranches } from "../Favorites/selector";
 import { bindActionCreators } from "redux";
-import { onPageChangeHandler } from "./thunk";
-
 import {
+  onPageChangeHandler,
   makeFavouriteHandler,
   removeFavouriteHandler,
-} from "../Favorites/thunk";
+} from "./thunk";
+
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { IconButton } from "@material-ui/core";
@@ -68,7 +68,19 @@ function BasicTable({
           <TableBody>
             {branches.map((branch) => (
               <TableRow key={branch["ifsc"]}>
-                <TableCell>Fav</TableCell>
+                <TableCell align="center">
+                  {branch["isFav"] ? (
+                    <IconButton
+                      onClick={() => removeFavouriteHandler(branch["ifsc"])}
+                    >
+                      <FavoriteIcon />
+                    </IconButton>
+                  ) : (
+                    <IconButton onClick={() => makeFavouriteHandler(branch)}>
+                      <FavoriteBorderIcon />
+                    </IconButton>
+                  )}
+                </TableCell>
                 <TableCell>{branch["ifsc"]}</TableCell>
                 <TableCell>{branch["bank_id"]}</TableCell>
                 <TableCell>{branch["branch"]}</TableCell>

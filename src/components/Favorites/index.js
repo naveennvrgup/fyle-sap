@@ -2,12 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 
 import Toolbar from "./Toolbar";
-// import Table from "./Table";
+import Table from "./Table";
 
 export const Favorites = (props) => {
   return (
     <div>
       <Toolbar />
+      <Table />
     </div>
   );
 };

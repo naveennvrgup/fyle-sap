@@ -1,10 +1,9 @@
 import { makeFavourite, removeFavourite } from "./actions";
 
-export const makeFavouriteHandler = (branch) => async (dispatch) => {
-  console.log(branch);
+export const makeFavouriteService = (branch) => async (dispatch) => {
   dispatch(makeFavourite(branch));
 };
 
-export const removeFavouriteHandler = (ifsc) => async (dispatch) => {
+export const removeFavouriteService = (ifsc) => async (dispatch) => {
   dispatch(removeFavourite(ifsc));
 };

@@ -61,6 +61,19 @@ const reducer = (state = initialState, action) => {
       };
     }
 
+    case actions.TOGGLE_FAV: {
+      const { ifsc } = payload;
+      const branches = [...state.branches];
+
+      const idx = branches.findIndex((branch) => branch["ifsc"] === ifsc);
+      branches[idx]["isFav"] = !branches[idx]["isFav"];
+
+      return {
+        ...state,
+        branches,
+      };
+    }
+
     default:
       return state;
   }

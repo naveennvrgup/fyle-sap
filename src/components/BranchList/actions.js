@@ -27,3 +27,9 @@ export const pgnoChange = (pgno) => ({
   type: PGNO_CHANGE,
   payload: { pgno },
 });
+
+export const TOGGLE_FAV = "TOGGLE_FAV";
+export const toggleFav = (ifsc) => ({
+  type: TOGGLE_FAV,
+  payload: { ifsc },
+});
