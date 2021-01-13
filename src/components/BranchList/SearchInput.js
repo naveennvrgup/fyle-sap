@@ -1,16 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { localFilterHandler } from "./thunk";
+import { getSearchText } from "./selector";
 
 import { makeStyles, TextField, FormControl } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    minWidth: theme.spacing(25)
+    minWidth: theme.spacing(25),
   },
 }));
 
-function SearchInput({ searchText, searchBranchHandler }) {
+function SearchInput({ searchText, localFilterHandler }) {
   const classes = useStyles();
   return (
     <FormControl className={classes.formControl}>
@@ -22,14 +24,17 @@ function SearchInput({ searchText, searchBranchHandler }) {
         size="small"
         // variant="outlined"
         value={searchText}
-        onChange={(e) => searchBranchHandler(e.target.value)}
+        onChange={(e) => localFilterHandler(e.target.value)}
       />
     </FormControl>
   );
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  searchText: getSearchText(state),
+});
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ localFilterHandler }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchInput);

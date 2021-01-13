@@ -1,6 +1,6 @@
 import * as actions from "./actions";
 
-const initialState = { branches: [] };
+const initialState = { branches: [], searchText: "" };
 
 const reducer = (state = initialState, action) => {
   const { type, payload } = action;
@@ -12,6 +12,15 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         branches,
+      };
+    }
+
+    case actions.LOCAL_FILTER: {
+      const { searchText } = payload;
+
+      return {
+        ...state,
+        searchText,
       };
     }
 

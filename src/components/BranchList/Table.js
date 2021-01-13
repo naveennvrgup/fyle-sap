@@ -13,7 +13,7 @@ const columns = [
     width: 120,
   },
   { field: "branch", headerName: "Branch", width: 200 },
-  { field: "address", headerName: "Address", width: 300 },
+  { field: "address", headerName: "Address", width: 400 },
   {
     field: "city",
     headerName: "City",

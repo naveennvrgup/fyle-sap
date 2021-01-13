@@ -4,8 +4,8 @@ export const searchBranches = (branches) => ({
   payload: { branches },
 });
 
-// export const END_LOADING = "END_LOADING";
-// export const endLoading = () => ({
-//   type: END_LOADING,
-//   payload: {},
-// });
+export const LOCAL_FILTER = "LOCAL_FILTER";
+export const localFilter = (searchText) => ({
+  type: LOCAL_FILTER,
+  payload: { searchText },
+});

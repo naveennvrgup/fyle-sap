@@ -1,5 +1,5 @@
 import { setLoading, endLoading } from "../Navbar/actions";
-import { searchBranches } from "./actions";
+import { searchBranches, localFilter } from "./actions";
 
 export const searchBranchesHandler = (q, limit, offset) => async (dispatch) => {
   dispatch(setLoading());
@@ -13,4 +13,8 @@ export const searchBranchesHandler = (q, limit, offset) => async (dispatch) => {
   dispatch(searchBranches(branches));
 
   dispatch(endLoading());
+};
+
+export const localFilterHandler = (searchText) => async (dispatch) => {
+  dispatch(localFilter(searchText));
 };
