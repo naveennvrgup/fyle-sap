@@ -1,17 +1,25 @@
 import * as actions from "./actions";
 
-const initialState = { branches: [], searchText: "", city: "", pageSize: "10" };
+const initialState = {
+  branches: [],
+  searchText: "",
+  city: "",
+  pageSize: 10,
+  offset: 0,
+  count: 0,
+};
 
 const reducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
     case actions.SEARCH_BRANCHES: {
-      const { branches } = payload;
+      const { branches, count } = payload;
 
       return {
         ...state,
         branches,
+        count,
       };
     }
 

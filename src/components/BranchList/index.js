@@ -3,11 +3,11 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Toolbar from "./Toolbar";
 import Table from "./Table";
-import { searchBranchesHandler } from "./thunk";
+import { fetchBranches } from "./thunk";
 
-export const BranchList = ({ searchBranchesHandler }) => {
+export const BranchList = ({ fetchBranches }) => {
   useEffect(() => {
-    searchBranchesHandler("", "", "");
+    fetchBranches();
   }, []);
 
   return (
@@ -21,6 +21,6 @@ export const BranchList = ({ searchBranchesHandler }) => {
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ searchBranchesHandler }, dispatch);
+  bindActionCreators({ fetchBranches }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(BranchList);

@@ -1,7 +1,7 @@
 export const SEARCH_BRANCHES = "SEARCH_BRANCHES";
-export const searchBranches = (branches) => ({
+export const searchBranches = (branches, count) => ({
   type: SEARCH_BRANCHES,
-  payload: { branches },
+  payload: { branches, count },
 });
 
 export const LOCAL_FILTER = "LOCAL_FILTER";

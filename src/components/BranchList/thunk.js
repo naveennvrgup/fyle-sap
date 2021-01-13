@@ -5,37 +5,47 @@ import {
   cityChange,
   pageSizeChange,
 } from "./actions";
-import { getPageSize } from "./selector";
+import { getPageSize, getOffset, getSearchText, getCity } from "./selector";
 
-export const searchBranchesHandler = (q, limit, offset) => async (
-  dispatch,
-  getState
-) => {
+export const searchService = (q, offset, pageSize) => async (dispatch) => {
   dispatch(setLoading());
-
-  const pageSize = getPageSize(getState());
 
   let response = await fetch(
     `https://fyle-server.herokuapp.com/api/branches?q=${q}&offset=${offset}&limit=${pageSize}`
   );
   let data = await response.json();
   let branches = data["branches"];
-  branches = branches.map((branch, id) => ({ id, ...branch }));
-  dispatch(searchBranches(branches));
+  let count = data["count"];
 
+  branches = branches.map((branch, id) => ({ id, ...branch }));
+
+  dispatch(searchBranches(branches, count));
   dispatch(endLoading());
+};
+
+export const fetchBranches = () => async (dispatch) => {
+  dispatch(searchService("", "", ""));
 };
 
 export const localFilterHandler = (searchText) => async (dispatch) => {
   dispatch(localFilter(searchText));
 };
 
-export const cityChangeHandler = (city) => async (dispatch) => {
+export const cityChangeHandler = (city) => async (dispatch, getState) => {
+  const state = getState();
+  const pageSize = getPageSize(state);
+
   dispatch(cityChange(city));
-  dispatch(searchBranchesHandler(city, "", ""));
+  dispatch(searchService(city, 0, pageSize));
 };
 
-export const pageSizeChangeHandler = (pageSize) => async (dispatch) => {
+export const pageSizeChangeHandler = (pageSize) => async (
+  dispatch,
+  getState
+) => {
+  const state = getState();
+  const city = getCity(state);
+
   dispatch(pageSizeChange(pageSize));
-  dispatch(searchBranchesHandler(pageSize, "", ""));
+  dispatch(searchService(city, 0, pageSize));
 };

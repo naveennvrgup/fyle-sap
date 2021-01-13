@@ -1,9 +1,12 @@
 import { createSelector } from "reselect";
 
+export const extractBranches = (state) => state.branchList.branches;
+
 export const getSearchText = (state) => state.branchList.searchText;
 export const getCity = (state) => state.branchList.city;
 export const getPageSize = (state) => state.branchList.pageSize;
-export const extractBranches = (state) => state.branchList.branches;
+export const getOffset = (state) => state.branchList.offset;
+export const getCount = (state) => state.branchList.count;
 
 export const getBranches = createSelector(
   extractBranches,

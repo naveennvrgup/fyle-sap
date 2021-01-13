@@ -1,6 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { getBranches, getPageSize } from "./selector";
+import { getBranches, getPageSize, getCount } from "./selector";
+import { getIsLoading } from "../Navbar/selector";
 
 import { DataGrid } from "@material-ui/data-grid";
 
@@ -34,35 +35,29 @@ const columns = [
   },
 ];
 
-function Table({ branches, getPageSize }) {
+function Table({ branches, pageSize, isLoading, count }) {
   return (
     <div style={{ height: "70vh", width: "100%" }}>
       <DataGrid
         rows={branches}
         columns={columns}
-        pageSize={getPageSize}
-        // checkboxSelection
+        pageSize={pageSize}
+        rowCount={count}
+        paginationMode="server"
+        onPageChange={(params) => {
+          console.log(params);
+        }}
+        loading={isLoading}
       />
     </div>
   );
 }
 
-{
-  /* <DataGrid
-  rows={rows}
-  columns={data.columns}
-  pagination
-  pageSize={5}
-  rowCount={100}
-  paginationMode="server"
-  onPageChange={handlePageChange}
-  loading={loading}
-/> */
-}
-
 const mapStateToProps = (state) => ({
   branches: getBranches(state),
   pageSize: getPageSize(state),
+  isLoading: getIsLoading(state),
+  count: getCount(state),
 });
 
 const mapDispatchToProps = {};
