@@ -1,20 +1,27 @@
 import React from "react";
 import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
+import { Switch, Route } from "react-router-dom";
+
+import BranchList from "./components/BranchList";
+import BranchDetail from "./components/BranchDetail";
+import Favorites from "./components/Favorites";
+import Navbar from "./components/Navbar";
+
+import "./App.css";
 import { Paper, Container, makeStyles } from "@material-ui/core";
-import './App.css';
 
 export const history = createBrowserHistory();
 
 const useStyles = makeStyles((theme) => ({
   root: {
     background: "#F5F5F5",
-    padding: theme.spacing(5),
+    paddingTop: theme.spacing(13),
   },
   paper: {
     padding: theme.spacing(5),
-    minHeight: '90vh'
-  }
+    minHeight: "90vh",
+  },
 }));
 
 function App() {
@@ -23,9 +30,14 @@ function App() {
   return (
     <div className={classes.root}>
       <Router history={history}>
+        <Navbar />
         <Container maxWidth="md">
           <Paper elevation={2} className={classes.paper}>
-            Some boilerplate code ....
+            <Switch>
+              <Route component={Favorites} path="/favorities" />
+              <Route component={BranchDetail} path="/banks/:branchId" />
+              <Route component={BranchList} path="/" />
+            </Switch>
           </Paper>
         </Container>
       </Router>

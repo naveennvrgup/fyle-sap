@@ -1,8 +1,8 @@
 import {} from "./actions";
 
-const initialState = { candidates: [], isLoading: true, searchText: "" };
+const initialState = { candidates: [], isLoading: false, searchText: "" };
 
-export const candidatesReducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -17,3 +17,5 @@ export const candidatesReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export default reducer;
