@@ -33,3 +33,9 @@ export const toggleFav = (ifsc) => ({
   type: TOGGLE_FAV,
   payload: { ifsc },
 });
+
+export const SET_API_CACHE = "SET_API_CACHE";
+export const setApiCache = (uri, data) => ({
+  type: SET_API_CACHE,
+  payload: { uri, data },
+});

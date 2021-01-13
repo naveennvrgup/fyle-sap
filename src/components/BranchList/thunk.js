@@ -6,8 +6,9 @@ import {
   pageSizeChange,
   pgnoChange,
   toggleFav,
+  setApiCache,
 } from "./actions";
-import { getPageSize, getCity, getPgno } from "./selector";
+import { getPageSize, getCity, getPgno, getApiCache } from "./selector";
 import { getIsLoading } from "../Navbar/selector";
 import { getFavBranches } from "../Favorites/selector";
 import {
@@ -21,14 +22,21 @@ export const searchService = (q, offset, pageSize) => async (
 ) => {
   dispatch(setLoading());
 
-  let response = await fetch(
-    `https://fyle-server.herokuapp.com/api/branches?q=${q}&offset=${offset}&limit=${pageSize}`
-  );
-  let data = await response.json();
+  const uri = `https://fyle-server.herokuapp.com/api/branches?q=${q}&offset=${offset}&limit=${pageSize}`;
+  const state = getState();
+  const apiCache = getApiCache(state);
+  let data;
+
+  if (apiCache.hasOwnProperty(uri)) {
+    data = apiCache[uri];
+  } else {
+    let response = await fetch(uri);
+    data = await response.json();
+    dispatch(setApiCache(uri, data));
+  }
+
   let branches = data["branches"];
   let count = data["count"];
-
-  const state = getState();
   const favBranches = getFavBranches(state);
 
   branches = branches.map((branch, id) => {
@@ -52,6 +60,10 @@ export const fetchBranches = () => async (dispatch, getState) => {
 
 export const localFilterHandler = (searchText) => async (dispatch) => {
   dispatch(localFilter(searchText));
+};
+
+export const setApiCacheService = (uri, data) => async (dispatch) => {
+  dispatch(setApiCache(uri, data));
 };
 
 export const pgnoChangeHandler = (pgno) => async (dispatch) => {

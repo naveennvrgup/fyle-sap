@@ -34,7 +34,7 @@ function CitySelector({ pageSizeChangeHandler, pageSize }) {
       >
         <MenuItem value={5}>5</MenuItem>
         <MenuItem value={10}>10</MenuItem>
-        <MenuItem value={25}>20</MenuItem>
+        <MenuItem value={25}>25</MenuItem>
         <MenuItem value={50}>50</MenuItem>
       </Select>
     </FormControl>

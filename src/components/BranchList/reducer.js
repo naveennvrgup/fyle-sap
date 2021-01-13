@@ -7,10 +7,12 @@ const initialState = {
   pageSize: 5,
   count: 0,
   pgno: 1,
+  apiCache: {},
 };
 
 const reducer = (state = initialState, action) => {
   const { type, payload } = action;
+  state = { ...initialState, ...state };
 
   switch (type) {
     case actions.SEARCH_BRANCHES: {
@@ -66,11 +68,26 @@ const reducer = (state = initialState, action) => {
       const branches = [...state.branches];
 
       const idx = branches.findIndex((branch) => branch["ifsc"] === ifsc);
-      branches[idx]["isFav"] = !branches[idx]["isFav"];
+      if (idx !== -1) {
+        branches[idx]["isFav"] = !branches[idx]["isFav"];
+      }
 
       return {
         ...state,
         branches,
+      };
+    }
+
+    case actions.SET_API_CACHE: {
+      const { uri, data } = payload;
+      const { apiCache } = state;
+
+      return {
+        ...state,
+        apiCache: {
+          ...apiCache,
+          [uri]: data,
+        },
       };
     }
 

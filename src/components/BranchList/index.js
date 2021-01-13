@@ -6,9 +6,7 @@ import SimpleTable from "./SimpleTable";
 import { fetchBranches } from "./thunk";
 
 export const BranchList = ({ fetchBranches }) => {
-  useEffect(() => {
-    fetchBranches();
-  }, []);
+  useEffect(fetchBranches);
 
   return (
     <div>

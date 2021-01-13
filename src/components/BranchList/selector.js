@@ -8,6 +8,7 @@ export const getCity = (state) => state.branchList.city;
 export const getPageSize = (state) => state.branchList.pageSize;
 export const getCount = (state) => state.branchList.count;
 export const getPgno = (state) => state.branchList.pgno;
+export const getApiCache = (state) => state.branchList.apiCache;
 
 export const getBranches = createSelector(
   extractBranches,
