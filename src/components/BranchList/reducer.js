@@ -1,6 +1,6 @@
 import * as actions from "./actions";
 
-const initialState = { branches: [], searchText: "", city: "" };
+const initialState = { branches: [], searchText: "", city: "", pageSize: "10" };
 
 const reducer = (state = initialState, action) => {
   const { type, payload } = action;
@@ -30,6 +30,15 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         city,
+      };
+    }
+
+    case actions.PAGE_SIZE_CHANGE: {
+      const { pageSize } = payload;
+
+      return {
+        ...state,
+        pageSize,
       };
     }
 

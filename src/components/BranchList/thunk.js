@@ -1,11 +1,22 @@
 import { setLoading, endLoading } from "../Navbar/actions";
-import { searchBranches, localFilter, cityChange } from "./actions";
+import {
+  searchBranches,
+  localFilter,
+  cityChange,
+  pageSizeChange,
+} from "./actions";
+import { getPageSize } from "./selector";
 
-export const searchBranchesHandler = (q, limit, offset) => async (dispatch) => {
+export const searchBranchesHandler = (q, limit, offset) => async (
+  dispatch,
+  getState
+) => {
   dispatch(setLoading());
 
+  const pageSize = getPageSize(getState());
+
   let response = await fetch(
-    `https://fyle-server.herokuapp.com/api/branches?q=${q}&offset=${offset}&${limit}=4`
+    `https://fyle-server.herokuapp.com/api/branches?q=${q}&offset=${offset}&limit=${pageSize}`
   );
   let data = await response.json();
   let branches = data["branches"];
@@ -22,4 +33,9 @@ export const localFilterHandler = (searchText) => async (dispatch) => {
 export const cityChangeHandler = (city) => async (dispatch) => {
   dispatch(cityChange(city));
   dispatch(searchBranchesHandler(city, "", ""));
+};
+
+export const pageSizeChangeHandler = (pageSize) => async (dispatch) => {
+  dispatch(pageSizeChange(pageSize));
+  dispatch(searchBranchesHandler(pageSize, "", ""));
 };

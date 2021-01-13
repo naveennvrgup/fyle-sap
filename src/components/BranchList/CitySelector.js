@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
 
 function CitySelector({ cityChangeHandler, city }) {
   const classes = useStyles();
-  console.log({ city });
 
   return (
     <FormControl className={classes.formControl}>

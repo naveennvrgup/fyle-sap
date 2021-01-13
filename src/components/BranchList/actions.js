@@ -15,3 +15,9 @@ export const cityChange = (city) => ({
   type: CITY_CHANGE,
   payload: { city },
 });
+
+export const PAGE_SIZE_CHANGE = "PAGE_SIZE_CHANGE";
+export const pageSizeChange = (pageSize) => ({
+  type: PAGE_SIZE_CHANGE,
+  payload: { pageSize },
+});
