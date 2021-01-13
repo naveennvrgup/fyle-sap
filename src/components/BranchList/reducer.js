@@ -1,20 +1,17 @@
 import * as actions from "./actions";
 
-const initialState = { isLoading: false };
+const initialState = { branches: [] };
 
 const reducer = (state = initialState, action) => {
-  const { type } = action;
+  const { type, payload } = action;
 
   switch (type) {
-    case actions.SET_LOADING: {
-      return {
-        isLoading: true,
-      };
-    }
+    case actions.SEARCH_BRANCHES: {
+      const { branches } = payload;
 
-    case actions.END_LOADING: {
       return {
-        isLoading: false,
+        ...state,
+        branches,
       };
     }
 

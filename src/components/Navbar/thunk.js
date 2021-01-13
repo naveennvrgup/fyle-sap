@@ -1,9 +1,9 @@
-import * as actions from "./actions";
+import { setLoading, endLoading } from "./actions";
 
 export const setLoadingHandler = (id) => async (dispatch) => {
-  dispatch(actions.setLoading());
+  dispatch(setLoading());
 };
 
 export const endLoadingHandler = (id) => async (dispatch) => {
-  dispatch(actions.endLoading());
+  dispatch(endLoading());
 };
