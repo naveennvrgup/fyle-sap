@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     fontSize: "1.5rem",
     fontWeight: "bold",
-    flexGrow: '1'
+    flexGrow: "1",
   },
   topBar: {
     display: "flex",

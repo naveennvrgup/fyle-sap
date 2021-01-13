@@ -33,10 +33,10 @@ function CitySelector({ pageSizeChangeHandler, pageSize }) {
         onChange={(e) => pageSizeChangeHandler(e.target.value)}
       >
         <MenuItem value={10}>10</MenuItem>
-        <MenuItem value={20}>20</MenuItem>
+        <MenuItem value={25}>20</MenuItem>
         <MenuItem value={50}>50</MenuItem>
+        <MenuItem value={75}>75</MenuItem>
         <MenuItem value={100}>100</MenuItem>
-        <MenuItem value={1000}>1000</MenuItem>
       </Select>
     </FormControl>
   );

@@ -1,7 +1,9 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { getBranches, getPageSize, getCount } from "./selector";
+import { getBranches, getPageSize, getCount, getPgno } from "./selector";
 import { getIsLoading } from "../Navbar/selector";
+import { bindActionCreators } from "redux";
+import { onPageChangeHandler } from "./thunk";
 
 import { DataGrid } from "@material-ui/data-grid";
 
@@ -35,17 +37,27 @@ const columns = [
   },
 ];
 
-function Table({ branches, pageSize, isLoading, count }) {
+function Table({
+  branches,
+  pageSize,
+  pgno,
+  isLoading,
+  count,
+  onPageChangeHandler,
+}) {
   return (
     <div style={{ height: "70vh", width: "100%" }}>
       <DataGrid
+        page={pgno}
         rows={branches}
         columns={columns}
         pageSize={pageSize}
         rowCount={count}
         paginationMode="server"
-        onPageChange={(params) => {
-          console.log(params);
+        onPageChange={({ paginationMode, page }) => {
+          if (paginationMode === "server") {
+            onPageChangeHandler(page);
+          }
         }}
         loading={isLoading}
       />
@@ -58,8 +70,10 @@ const mapStateToProps = (state) => ({
   pageSize: getPageSize(state),
   isLoading: getIsLoading(state),
   count: getCount(state),
+  pgno: getPgno(state),
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ onPageChangeHandler }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

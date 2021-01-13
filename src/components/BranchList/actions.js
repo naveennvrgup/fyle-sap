@@ -21,3 +21,9 @@ export const pageSizeChange = (pageSize) => ({
   type: PAGE_SIZE_CHANGE,
   payload: { pageSize },
 });
+
+export const PGNO_CHANGE = "PGNO_CHANGE";
+export const pgnoChange = (pgno) => ({
+  type: PGNO_CHANGE,
+  payload: { pgno },
+});

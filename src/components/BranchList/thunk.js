@@ -4,8 +4,10 @@ import {
   localFilter,
   cityChange,
   pageSizeChange,
+  pgnoChange,
 } from "./actions";
-import { getPageSize, getOffset, getSearchText, getCity } from "./selector";
+import { getPageSize, getCity, getPgno } from "./selector";
+import { getIsLoading } from "../Navbar/selector";
 
 export const searchService = (q, offset, pageSize) => async (dispatch) => {
   dispatch(setLoading());
@@ -31,12 +33,29 @@ export const localFilterHandler = (searchText) => async (dispatch) => {
   dispatch(localFilter(searchText));
 };
 
+export const pgnoChangeHandler = (pgno) => async (dispatch) => {
+  dispatch(pgnoChange(pgno));
+};
+
 export const cityChangeHandler = (city) => async (dispatch, getState) => {
   const state = getState();
   const pageSize = getPageSize(state);
 
   dispatch(cityChange(city));
   dispatch(searchService(city, 0, pageSize));
+};
+
+export const onPageChangeHandler = (pgno) => async (dispatch, getState) => {
+  const state = getState();
+  const pageSize = getPageSize(state);
+  const city = getCity(state);
+  const currPgno = getPgno(state);
+  const isLoading = getIsLoading(state);
+
+  if (currPgno === pgno || isLoading) return;
+
+  dispatch(pgnoChangeHandler(pgno));
+  dispatch(searchService(city, (pgno - 1) * pageSize, pageSize));
 };
 
 export const pageSizeChangeHandler = (pageSize) => async (

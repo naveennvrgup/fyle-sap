@@ -5,8 +5,8 @@ const initialState = {
   searchText: "",
   city: "",
   pageSize: 10,
-  offset: 0,
   count: 0,
+  pgno: 1,
 };
 
 const reducer = (state = initialState, action) => {
@@ -38,6 +38,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         city,
+        pgno: 1,
       };
     }
 
@@ -47,6 +48,16 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         pageSize,
+        pgno: 1,
+      };
+    }
+
+    case actions.PGNO_CHANGE: {
+      const { pgno } = payload;
+
+      return {
+        ...state,
+        pgno,
       };
     }
 
