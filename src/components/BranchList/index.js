@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Toolbar from "./Toolbar";
-import Table from "./Table";
+import SimpleTable from "./SimpleTable";
 import { fetchBranches } from "./thunk";
 
 export const BranchList = ({ fetchBranches }) => {
@@ -13,7 +13,7 @@ export const BranchList = ({ fetchBranches }) => {
   return (
     <div>
       <Toolbar />
-      <Table />
+      <SimpleTable />
     </div>
   );
 };

@@ -12,11 +12,15 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.5rem",
     fontWeight: "bold",
     flexGrow: "1",
+    marginBottom: theme.spacing(2),
   },
-  topBar: {
+  bottomRow: {
     display: "flex",
-    alignItems: "flex-end",
+    justifyContent: "space-between",
     marginBottom: theme.spacing(5),
+  },
+  fGrow: {
+    flexGrow: "1",
   },
 }));
 
@@ -24,13 +28,17 @@ export default function Toolbar() {
   const classes = useStyles();
 
   return (
-    <div className={classes.topBar}>
-      <CitySelector />
-      <PageSizeSelector />
+    <>
       <Typography varient="h1" className={classes.titleText}>
         Branches
       </Typography>
-      <SearchInput />
-    </div>
+      <div className={classes.bottomRow}>
+        <div>
+          <CitySelector />
+          <PageSizeSelector />
+        </div>
+        <SearchInput />
+      </div>
+    </>
   );
 }

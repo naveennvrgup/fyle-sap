@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     background: "#F5F5F5",
     minHeight: '100vh', 
     paddingTop: theme.spacing(13),
+    paddingBottom: theme.spacing(5),
   },
   paper: {
     padding: theme.spacing(5),

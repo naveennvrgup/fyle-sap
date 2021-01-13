@@ -25,8 +25,12 @@ export const searchService = (q, offset, pageSize) => async (dispatch) => {
   dispatch(endLoading());
 };
 
-export const fetchBranches = () => async (dispatch) => {
-  dispatch(searchService("", "", ""));
+export const fetchBranches = () => async (dispatch, getState) => {
+  const state = getState();
+  const pageSize = getPageSize(state);
+  const city = getCity(state);
+
+  dispatch(searchService(city, 0, pageSize));
 };
 
 export const localFilterHandler = (searchText) => async (dispatch) => {
@@ -53,7 +57,7 @@ export const onPageChangeHandler = (pgno) => async (dispatch, getState) => {
   const isLoading = getIsLoading(state);
 
   if (currPgno === pgno || isLoading) return;
-
+  
   dispatch(pgnoChangeHandler(pgno));
   dispatch(searchService(city, (pgno - 1) * pageSize, pageSize));
 };

@@ -4,7 +4,7 @@ const initialState = {
   branches: [],
   searchText: "",
   city: "",
-  pageSize: 10,
+  pageSize: 5,
   count: 0,
   pgno: 1,
 };
