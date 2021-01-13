@@ -1,6 +1,7 @@
 import { createSelector } from "reselect";
 
 export const getSearchText = (state) => state.branchList.searchText;
+export const getCity = (state) => state.branchList.city;
 
 export const getBranches = (state) => {
   let { searchText, branches } = state.branchList;

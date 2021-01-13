@@ -9,3 +9,9 @@ export const localFilter = (searchText) => ({
   type: LOCAL_FILTER,
   payload: { searchText },
 });
+
+export const CITY_CHANGE = "CITY_CHANGE";
+export const cityChange = (city) => ({
+  type: CITY_CHANGE,
+  payload: { city },
+});

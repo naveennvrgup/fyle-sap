@@ -1,6 +1,6 @@
 import * as actions from "./actions";
 
-const initialState = { branches: [], searchText: "" };
+const initialState = { branches: [], searchText: "", city: "" };
 
 const reducer = (state = initialState, action) => {
   const { type, payload } = action;
@@ -21,6 +21,15 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         searchText,
+      };
+    }
+
+    case actions.CITY_CHANGE: {
+      const { city } = payload;
+
+      return {
+        ...state,
+        city,
       };
     }
 
