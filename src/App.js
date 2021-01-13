@@ -10,6 +10,8 @@ import Navbar from "./components/Navbar";
 
 import "./App.css";
 import { Paper, Container, makeStyles } from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/styles";
+import { theme } from "./theme";
 
 export const history = createBrowserHistory();
 
@@ -29,18 +31,20 @@ function App() {
 
   return (
     <div className={classes.root}>
-      <Router history={history}>
-        <Navbar />
-        <Container maxWidth="md">
-          <Paper elevation={2} className={classes.paper}>
-            <Switch>
-              <Route component={Favorites} path="/favorities" />
-              <Route component={BranchDetail} path="/banks/:branchId" />
-              <Route component={BranchList} path="/" />
-            </Switch>
-          </Paper>
-        </Container>
-      </Router>
+      <ThemeProvider theme={theme}>
+        <Router history={history}>
+          <Navbar />
+          <Container maxWidth="md">
+            <Paper elevation={2} className={classes.paper}>
+              <Switch>
+                <Route component={Favorites} path="/favorities" />
+                <Route component={BranchDetail} path="/banks/:branchId" />
+                <Route component={BranchList} path="/" />
+              </Switch>
+            </Paper>
+          </Container>
+        </Router>
+      </ThemeProvider>
     </div>
   );
 }
