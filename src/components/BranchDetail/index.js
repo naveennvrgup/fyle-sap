@@ -12,8 +12,12 @@ import {
 } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
-  title: {
-    marginBottom: theme.spacing(5),
+  titleText: {
+    textAlign: "center",
+    fontSize: "1.5rem",
+    fontWeight: "bold",
+    flexGrow: "1",
+    marginBottom: theme.spacing(6),
   },
   boldText: {
     fontWeight: "bold",
@@ -44,7 +48,7 @@ export const BranchDetail = ({
         </IconButton>
         <Typography
           variant="h3"
-          className={classes.title}
+          className={classes.titleText}
           component="h1"
           align="center"
         >
