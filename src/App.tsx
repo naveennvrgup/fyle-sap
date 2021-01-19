@@ -18,7 +18,7 @@ export const history = createBrowserHistory();
 const useStyles = makeStyles((theme) => ({
   root: {
     background: "#F5F5F5",
-    minHeight: '100vh', 
+    minHeight: "100vh",
     paddingTop: theme.spacing(13),
     paddingBottom: theme.spacing(5),
   },
